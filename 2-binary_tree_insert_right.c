@@ -1,40 +1,31 @@
 #include "binary_trees.h"
-
-/*
- * binary_tree_insert_right - Inserts a node as the right-child of a specified node.
- * @parent: Pointer to the node where the right-child is to be inserted.
- * @value: The value to be assigned to the new node.
- * Return: A pointer to the newly created node or NULL in case of failure or if the parent is NULL.
+/**
+ * binary_tree_insert_right -  Adds a new node with the specified value to the right of the parent
+ * If the parent already has a right child, it moves down one level and adds the new node as the first right child
+ * @parent: The parent node to which the new node will be added on the right
+ * @value: The value of the new node
+ * Return: Returns NULL if the operation fails, otherwise returns the pointer to the new node.
  */
 
-binary_tree_t *binary_tree_insert_right(binary_tree_t *parennt, int value)
+binary_tree_t *binary_tree_insert_right(binary_tree_t *parent, int value)
 {
-	binary_tree_t *newwnode = NULL;
+	binary_tree_t *neww_node;
 
-	if (parennt == NULL)
+	if (parent == NULL)
 	{
 		return (NULL);
 	}
-	newwnode = malloc(sizeof(binary_tree_t));
-	if (newwnode == NULL)
+
+	neww_node = binary_tree_node(parent, value);
+	if (neww_node == NULL)
 	{
 		return (NULL);
 	}
-	(*newwnode).n = value;
-	(*newwnode).left = NULL;
-	(*newwnode).rght = NULL;
-
-	if ((*parennt).rght != NULL)
+	if (parent->right != NULL)
 	{
-		(*newwnode).parent = parennt;
-		(*newwnode).rght = (*parennt).rght;
-		(*parennt).rght = newwnode;
-		(*(*newnode).rght).parennt = newwnode;
+		neww_node->right = parent->right;
+		parent->right->parent = neww_node;
 	}
-	else
-	{
-		(*parennt).rght = newwnode;
-		(*newwnode).parennt = parennt;
-	}
-	return (newwnode);
+	parent->right = neww_node;
+	return (neww_node);
 }
