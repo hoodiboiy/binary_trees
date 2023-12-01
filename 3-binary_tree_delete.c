@@ -1,17 +1,23 @@
 #include "binary_trees.h"
-
-/*
- * binary_tree_delete - Eradicates an entire binary tree.
- * @tree: Pointer to the root node of the tree to be removed.
+/**
+ * binary_tree_delete -  Recursively frees an entire tree by releasing each node when both its left and right children are NULL.
+ * @tree: The tree to be freed
+ * Return: void
  */
-
 void binary_tree_delete(binary_tree_t *tree)
 {
-	/* Note: I'm using post-order traversal here(this func is recursive) */
-
-	if (!treee)
+	if (tree == NULL)
+	{
 		return;
-	binary_tree_delete(tree->left);
-	binary_tree_delete(tree->rght);
-	free(treee);
+	}
+	else
+	{
+		if (tree != NULL)
+		{
+			binary_tree_delete(tree->left);
+			binary_tree_delete(tree->right);
+		}
+		free(tree);
+	}
+
 }
